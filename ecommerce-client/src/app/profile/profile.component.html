@@ -1,0 +1,63 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container bootdey flex-grow-1 container-p-y">
+
+            <div class="media align-items-center py-3 mb-3">
+              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-100 rounded-circle">
+              <div class="media-body ml-4">
+                <h4 class="font-weight-bold mb-0">{{user?.firstName}} {{user?.lastName}}</h4>
+                <div class="text-muted mb-2">{{user?.email}}</div>
+                <div class="text-muted mb-2">{{user?.address_L}}</div>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Edit</a>&nbsp;
+                <a href="javascript:void(0)" class="btn btn-default btn-sm">Profile</a>&nbsp;
+                <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <table class="table user-view-table m-0">
+                  <tbody>
+                    <tr>
+                      <td>Registered:</td>
+                      <td>{{user?.createdAt}}</td>
+                    </tr>
+                   
+                    <tr>
+                      <td>Verified:</td>
+                      <td><span class="fa fa-check text-primary"></span>&nbsp; {{user?.verified}}</td>
+                    </tr>
+                    <tr>
+                      <td>Role:</td>
+                      <td>{{user?.itemtype}}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <hr class="border-light m-0">
+              
+              <h4 class="font-weight-bold mb-0 ml-4">My orders</h4>
+              <div class="table-responsive">
+                <table class="table card-table m-0">
+                  <tbody>
+                    <tr>
+                      <th>Order ref</th>
+                      <th>Total Price</th>
+                      <th>Total Qty</th>
+                      <th>Date</th>
+                    </tr>
+                    <tr *ngFor="let order of user.orders">
+                      <td>{{order.ref}}</td>
+                      <td>${{order.priceTotal}}</td>
+                      <td>{{order.quantityTotal}}</td>
+                      <td>{{order.createdAt}}</td>
+                      
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          
+          </div>

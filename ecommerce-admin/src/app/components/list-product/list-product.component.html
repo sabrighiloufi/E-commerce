@@ -1,0 +1,117 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length">
+                    <label>Show
+                         <select [(ngModel)]="itemPerPage" name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                            <option value="5" [selected]>5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select> products</label>
+                    </div></div>
+                <div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:
+                    <input [(ngModel)]="search_name" type="text" class="form-control form-control-sm"  ></label></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 31px;">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 31px;">Name</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 31px;">Price</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Quantity</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 31px;">Subcategory</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 70px;">Action</th></tr>
+                    </thead>
+                    <tfoot>
+                        <tr><th rowspan="1" colspan="1">#</th><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Price</th><th rowspan="1" colspan="1">Quantity</th><th rowspan="1" colspan="1">Subcategory</th><th rowspan="1" colspan="1">Action</th></tr>
+                    </tfoot>
+                    <tbody>  
+                    <tr class="odd" *ngFor="let product of products | searchbyname: search_name | paginate: { itemsPerPage: itemPerPage, currentPage: p }; let index=index">
+                            <td class="sorting_1">{{index+1}}</td>
+                            <td>{{product.refproduct}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.subcategory.name}}</td>
+                            <td>
+                                <a (click)="deleteProduct(product._id)" class="btn btn-sm btn-danger btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    
+                                </a>
+                                <a [routerLink]="['/product-details', product._id]" class="btn btn-sm ml-2 btn-info btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>
+                                    
+                                </a>
+                                <a  (click)="open(content, product)" class="btn btn-sm btn-success ml-2 btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    
+                                </a>
+                            </td>
+                        </tr></tbody>
+                </table></div></div>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- modal -->
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="product">
+			<div class="mb-3">
+			
+                <div class="form-group">
+                    Name
+                    <input type="text" formControlName="refproduct" class="form-control form-control-user" id="exampleInputEmail" >
+                    
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        Price
+                        <input type="number" formControlName="price" class="form-control form-control-user" id="exampleFirstName" >
+                    </div>
+                    <div class="col-sm-6">
+                        Quantity
+                        <input type="number" formControlName="quantity" class="form-control form-control-user" id="exampleLastName" >
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    Description
+                    <textarea formControlName="description" class="form-control form-control-user" id="exampleInputEmail" ></textarea>
+                </div>
+				
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); updateProduct()">Save</button>
+	</div>
+</ng-template>
+
+
+<hr />
+
+<pre>{{ closeResult }}</pre>

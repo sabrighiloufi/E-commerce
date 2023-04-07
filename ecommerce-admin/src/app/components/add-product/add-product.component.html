@@ -1,0 +1,55 @@
+ <!-- Page Heading -->
+ <h1 class="h3 mb-2 text-gray-800">Create Product </h1>
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create Product!</h1>
+                        </div>
+                        <form class="user" [formGroup]="product">
+                            <div class="form-group row col-sm-6">
+                                <label>Subcategories
+                                <select formControlName="subcategory" class="custom-select custom-select-sm form-control form-control-sm">
+                                    <option *ngFor="let sub of subcategories"  [value]="sub._id">{{sub.name}}</option>
+                                </select></label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="refproduct" class="form-control form-control-user" id="exampleInputEmail" placeholder="Name product">
+                            </div>
+                            <div class="form-group">
+                                <input name="photos" (change)="onFileChange($event)" type="file"  class="form-control " id="exampleInputEmail" placeholder="pictures product" multiple>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="number" formControlName="price" class="form-control form-control-user"  placeholder="Price">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="number" formControlName="quantity" class="form-control form-control-user" id="exampleLastName" placeholder="Quantity">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <textarea formControlName="description" class="form-control form-control-user" id="exampleInputEmail" placeholder="Description"></textarea>
+                            </div>
+                            <a (click)="addProduct()" class="btn btn-primary btn-user btn-block">
+                                create Product
+                            </a>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
