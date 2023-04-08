@@ -1,6 +1,6 @@
 # E-commerce 
 
-Fullstack js application
+online sales platform
 
 ## Technologies Used
 
