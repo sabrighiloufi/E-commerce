@@ -1,6 +1,6 @@
 # E-commerce 
 
-online sales platform
+online sales platform (Fullstack js)
 
 ## Technologies Used
 
